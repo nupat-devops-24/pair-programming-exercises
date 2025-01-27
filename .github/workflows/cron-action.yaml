@@ -2,7 +2,7 @@ name: Extract Weather Reports Data
 
 on:
   schedule:
-    - cron: "35 * * * *" 
+    - cron: "0 0 1 * *" 
   workflow_dispatch:
 
 permissions:
@@ -29,5 +29,5 @@ jobs:
       - name: Commit and push changes
         run: |
           git add result.log
-          git commit -m "Update weather report log [skip ci]" || echo "No changes to commit"
+          git commit -m "chore: update weather report log [skip ci]" || echo "No changes to commit"
           git push
