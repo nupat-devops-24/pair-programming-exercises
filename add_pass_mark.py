@@ -47,8 +47,8 @@ def increase_score():  # Written by @donadams & @teemy - modified by @tomisile
 def increase_score_v2():
     """Increments the scores in a CSV file by a given value."""
     try:
-        with open('students_results.csv', 'r') as data, \
-                open('new_students_results.csv', 'w') as output_file:
+        with open('students_results.csv', 'r', encoding="utf-8") as data, \
+                open('new_students_results.csv', 'w', encoding="utf-8") as output_file:
             # Read the first line in the data file
             header = data.readline()
             # Write out the first line into a new data file
