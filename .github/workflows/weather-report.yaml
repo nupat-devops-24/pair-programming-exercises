@@ -2,7 +2,7 @@ name: Extract Weather Reports Data
 
 on:
   schedule:
-    - cron: "0 0 1 * *" 
+    - cron: "0 0 1 * *" # Runs at 00:00, day 1 of every month
   workflow_dispatch:
 
 permissions:
@@ -13,8 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps: 
-      - name: Clone repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Run script
         run: |
@@ -29,5 +28,5 @@ jobs:
       - name: Commit and push changes
         run: |
           git add result.log
-          git commit -m "chore: update weather report log [skip ci]" || echo "No changes to commit"
+          git commit -m "chore: update weather report log" || echo "No changes to commit"
           git push
