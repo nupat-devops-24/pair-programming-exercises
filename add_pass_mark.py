@@ -4,12 +4,12 @@
 import csv
 
 
-def increase_score():
+def increase_score():  # Written by @donadams & @teemy - modified by @tomisile
     """Increments the scores in a CSV file by a given value."""
     # Initialize an empty dictionary to store the data
     data_dict = {}
 
-    with open('students_results.csv', newline='') as csvfile:
+    with open('students_results.csv', newline='', encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile)
 
         # Skip the first row
@@ -25,6 +25,9 @@ def increase_score():
                 print(f"Invalid score value for {name}: {row[1]}")
                 continue  # Skip this row if the score is invalid
 
+            # Define a temporary variable new_score to avoid pep8 violation
+            # Recommendation: update score instead
+            new_score = 0
             # Apply the score increment logic based on conditions
             if score < 40:
                 new_score = score + 20  # If score < 40, add 20
