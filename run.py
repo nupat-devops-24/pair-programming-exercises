@@ -1,8 +1,8 @@
 """Function calls are made from this file."""
 
 
-import add_pass_mark as boost
 import time
+import add_pass_mark as boost
 
 
 # Function calls
