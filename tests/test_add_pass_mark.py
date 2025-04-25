@@ -37,7 +37,6 @@ class TestIncreaseScores(unittest.TestCase):
         expected = {'Titi': 52, 'Bose': 75, 'Mary': 88, 'Segun': 58}
         self.assertEqual(result, expected)
 
-    
     def test_increase_score_invalid_input(self):
         """TODO: function description"""
         print('Debug: inserting data')
@@ -59,6 +58,7 @@ class TestIncreaseScores(unittest.TestCase):
         print('Debug: asserting that the output is equal to the expected values')
         expected = {'Bose': 75, 'Mary': 88, 'Segun': 58}
         self.assertEqual(result, expected)
+
 
 if __name__ == '__main__':
     unittest.main()
