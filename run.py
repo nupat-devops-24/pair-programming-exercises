@@ -7,7 +7,7 @@ import add_pass_mark as boost
 
 # Function calls
 e1 = time.time()
-boost.increase_score()
+boost.increase_score('students_results.csv')
 e2 = time.time()
 # Time taken for first function
 function_1_time = e2 - e1

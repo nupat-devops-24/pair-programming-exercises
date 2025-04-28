@@ -4,12 +4,18 @@
 import csv
 
 
-def increase_score():  # Written by @donadams & @teemy - modified by @tomisile
-    """Increments the scores in a CSV file by a given value."""
+# Written by @donadams & @teemy - modified by @tomisile
+def increase_score(filename: str) -> dict:
+    """
+    Increments the scores in a CSV file by a given value.
+
+    Args:
+        filename: name of the csv file holding the scores to be incremented
+    """
     # Initialize an empty dictionary to store the data
     data_dict = {}
 
-    with open('students_results.csv', newline='', encoding="utf-8") as csvfile:
+    with open(filename, newline='', encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile)
 
         # Skip the first row
