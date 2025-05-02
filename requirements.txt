@@ -1,0 +1,9 @@
+# API framework
+fastapi
+pydantic
+
+# Lint Python script
+pylint
+
+uvicorn
+watchfiles
