@@ -1,0 +1,68 @@
+name: Notify Slack Channel on Pull Request
+
+on:
+  push:
+    branches-ignore:
+      - dev
+  pull_request:
+    branches:
+      - dev
+      - main
+      - staging
+
+jobs:
+  notify-on-pr:
+    name: Notify Slack on Pull Request
+    if: github.event_name == 'pull_request' && github.event_name != 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Send Slack notification
+        uses: slackapi/slack-github-action/@v2.1.0
+        with:
+          method: chat.postMessage
+          token: ${{ secrets.SLACK_BOT_TOKEN }}
+          payload: |
+            {
+              "channel": "${{ vars.SLACK_CHANNEL_ID }}",
+              "text": "A new PR was just opened #${{ github.event.pull_request.number }} :rocket:",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "${{ github.event.pull_request.user.login }} opened a Pull Request :rocket:. \
+                    \n\nOne blank lines placed before this sentence."
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Pull Request #${{ github.event.pull_request.number }}:*\
+                      \n<${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.title }}>"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Incoming Branch:*\n`${{ github.head_ref }}`"
+                    }
+                  ]
+                },
+                {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "Preview"
+                      },
+                      "url": "https://nupat.africa"
+                    }
+                  ]
+                }
+              ]
+            }
