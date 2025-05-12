@@ -70,3 +70,51 @@ jobs:
                 }
               ]
             }
+      - name: Slack notification on closed pull request
+        if: github.event.action == 'close pull_request' 
+        uses: slackapi/slack-github-action/@v2.1.0
+        with:
+            method: chat.postMessage
+            token: ${{ secrets.SLACK_BOT_TOKEN }}
+            payload: |
+              {
+              "channel": "${{ vars.SLACK_CHANNEL_ID }}",
+              "text": "A Pull Request has been closed #${{ github.event.pull_request.number }} :rocket:",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "${{ github.event.pull_request.user.login }} closed a Pull Request :rocket:. \
+                    \n\nTODO: update pr message"
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Closed Pull Request with no URL #${{ github.event.pull_request.number }}:*\
+                      \n<${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.title }}>"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Incoming Branch:*\n`${{ github.head_ref }}`"
+                    }
+                  ]
+                },
+                {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "Preview"
+                      },
+                      "url": "https://nupat.africa"
+                    }
+                  ]
+                }
+              ]
+              }
