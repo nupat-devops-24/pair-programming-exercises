@@ -16,14 +16,14 @@ jobs:
     name: Notify Slack on Pull Request
     if: >
       github.event_name == 'pull_request' &&
-      github.event_name != 'push' &&
-      github.event.action != 'synchronize'
+      github.event_name != 'push'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
       - name: Send Slack notification
+        if: github.event.action != 'synchronize'
         uses: slackapi/slack-github-action/@v2.1.0
         with:
           method: chat.postMessage
