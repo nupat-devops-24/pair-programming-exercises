@@ -34,7 +34,7 @@ jobs:
                   "text": {
                     "type": "mrkdwn",
                     "text": "${{ github.event.pull_request.user.login }} opened a Pull Request :rocket:. \
-                    \n\nOne blank lines placed before this sentence."
+                    \n\nSynchronized PR?"
                   }
                 },
                 {
