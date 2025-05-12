@@ -5,6 +5,7 @@ on:
     branches-ignore:
       - dev
   pull_request:
+    types: [closed, opened, synchronize, reopened]
     branches:
       - dev
       - main
@@ -13,7 +14,10 @@ on:
 jobs:
   notify-on-pr:
     name: Notify Slack on Pull Request
-    if: github.event_name == 'pull_request' && github.event_name != 'push'
+    if: >
+      github.event_name == 'pull_request' &&
+      github.event_name != 'push' &&
+      github.event.action != 'synchronize'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -34,7 +38,7 @@ jobs:
                   "text": {
                     "type": "mrkdwn",
                     "text": "${{ github.event.pull_request.user.login }} opened a Pull Request :rocket:. \
-                    \n\nSynchronized PR?"
+                    \n\nTODO: update pr message"
                   }
                 },
                 {
