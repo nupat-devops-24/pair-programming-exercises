@@ -26,6 +26,7 @@ with open("channels.json", encoding="utf8") as file:
         channel = Channel(**channel_raw)
         channels[channel.id] = channel
 
+
 @app.get("/")
 def read_root() -> Response:
     """To-do: Function description."""
