@@ -5,3 +5,11 @@ __pycache__/
 
 # Environment variables
 .env
+
+
+### Terraform ###
+
+.terraform/
+*.ftstate
+*.tfstate.backup
+*.lock.hcl
