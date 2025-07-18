@@ -1,37 +1,40 @@
 name: Daily Pylint Schedule Workflow
 
 on:
-  push: 
+  push:
     branches-ignore:
       - main
       - dev
-    pull_request:
-      branches:
+  pull_request:
+    branches:
       - main
       - dev
+  schedule:
+    - cron: "0 19 * * *"  # Runs at 7PM UTC
+  workflow_dispatch:
 
-  schedule: 
-   -cron: " 0 19 * * * "  #Runs at 7Pm
-  workflow_dispatch: # Allow manual trigger
- 
 permissions:
   contents: read
 
 jobs:
   run-job:
     runs-on: ubuntu-latest
-    
-    steps:
-      - name: checkout code
-        uses: actions/checkout@v4
-       
-      - name: run task on 
-        run: echo "run on schedule or push (excluding main or dev branch)" && 
-        PR to main and dev
 
-        
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          echo "Installing requirements..."
           pip install -r requirements.txt
 
-      - name: Analysing the code with pylint
+      - name: Analyse the code with pylint
         run: |
+          echo "Running pylint..."
           pylint $(git ls-files '*.py')
