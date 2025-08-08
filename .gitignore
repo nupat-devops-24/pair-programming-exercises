@@ -10,6 +10,6 @@ __pycache__/
 ### Terraform ###
 
 .terraform/
-*.ftstate
+*.tfstate
 *.tfstate.backup
 *.lock.hcl
