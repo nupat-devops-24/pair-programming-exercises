@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 BUCKET_NAME="my-static-website-04"
 # ENDPOINT=https://localhost.localstack.cloud:4566
